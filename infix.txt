@@ -1,0 +1,70 @@
+#include<bits/stdc++.h>
+using namespace std;
+int priority( char c)
+{
+    switch(c)
+    {
+        case '(':
+            return 0;
+        case '+':
+        case '-':
+            return 1;
+        case '*':
+        case '/':
+            return 2;
+        case '^':
+            return 3;
+        default:
+            return 0;
+    }
+}
+int main()
+ {
+	int t;
+	cin>>t;
+	while(t--)
+	{
+	    string str,post="";
+	    cin>>str;
+	    char c,next;
+	    stack<char> s;
+	    for(int i=0;i<str.size();i++)
+	    {
+	        c=str[i];
+	        switch(c)
+	        {
+	            case '(':
+	                s.push(c);
+	                break;
+	            case ')':
+	                while((next=s.top())!='('){
+	                    post+=next;
+	                    s.pop();
+	                }
+	                s.pop();
+	                    break;
+	            case '+':
+	            case '-':
+	            case '^':
+	            case '*':
+	            case '/':
+	                while(!s.empty() && priority(s.top())>=priority(c)){
+	                    post+=s.top();
+	                    s.pop();
+	                }
+	                s.push(c);
+	                break;
+	            default:
+	                post+=c;
+	        }
+	    }
+	    while(!s.empty())
+	    {
+	        if(s.top()!='(' && s.top()!=')')
+	            post+=s.top();
+	        s.pop();
+	    }
+	    cout<<post<<endl;
+	}
+	return 0;
+}

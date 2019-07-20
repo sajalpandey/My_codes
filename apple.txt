@@ -1,0 +1,18 @@
+#include <iostream>
+#include<math.h>
+using namespace std;
+
+int main() {
+	
+	int minApples=13;
+	double totalApplesInSquare = 0;
+    int unit =0;
+    
+    while(totalApplesInSquare<minApples){
+        unit++;
+        totalApplesInSquare +=12*pow(unit,2);
+    }
+
+    cout<< unit*8;
+	return 0;
+}
